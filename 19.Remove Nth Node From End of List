@@ -24,6 +24,6 @@ class Solution(object):
         slow.next = slow.next.next
         return head
   """
-  Linked List
+  LinkedList
   Two Pointers
   """
