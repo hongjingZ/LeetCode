@@ -1,0 +1,18 @@
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        s,a = str(x),0
+        b = len(s)-1
+        while(a < b):
+            if s[a] == s[b]:
+                a += 1
+                b -= 1
+            else:
+                return False
+        return True
+  """
+  Math
+  """
