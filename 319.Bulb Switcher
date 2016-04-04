@@ -1,0 +1,19 @@
+class Solution(object):
+    def bulbSwitch(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 0:  return 0
+        start,end = 1,n
+        while(start <= end):
+            mid = (start + end)/2
+            temp = mid * mid
+            if temp < n:   start = mid + 1
+            if temp > n:   end = mid - 1
+            if temp == n:   return mid
+        return mid-1 if mid * mid > n else mid
+        ##return int(math.sqrt(n))
+  """
+  Math
+  """
