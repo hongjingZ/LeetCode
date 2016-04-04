@@ -1,0 +1,15 @@
+class Solution(object):
+    def test_set(self, s, wordDict, checked):
+        if not len(s):  return True
+        if s in checked:    return False
+        checked.add(s)
+        for w in wordDict:
+            if s.startswith(w):
+                if self.test_set(s[len(w):], wordDict, checked):    return True
+        return False
+    def wordBreak(self, s, wordDict):
+        return self.test_set(s, wordDict, set())
+  """
+  DFS
+  Memorize
+  """
