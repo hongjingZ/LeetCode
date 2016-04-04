@@ -1,0 +1,39 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    """
+    BFS Solution:
+    def preorderTraversal(self, root):
+        res = []
+        if root == None: return [] 
+        my_queue = [root]
+        while(my_queue):
+            node = my_queue.pop()
+            res.append(node.val)
+            if node.right != None:
+                my_queue.append(node.right)
+            if node.left != None:
+                my_queue.append(node.left)  
+        return res
+    """
+    #####DFS solution
+    def preorderTraversal(self, root):
+        res = []
+        self.dfs(root,res)
+        return res
+    def dfs(self,node,res):
+        if node == None:
+            return
+        res.append(node.val)
+        self.dfs(node.left,res)
+        self.dfs(node.right,res)
+  """
+  Tree
+  BFS
+  DFS
+  """
