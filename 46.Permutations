@@ -1,0 +1,18 @@
+class Solution(object):
+    def permute(self, nums):
+        res = []
+        def permute1(nums,curr,res):
+            for i in xrange(len(nums)):
+                if len(nums) == 1:  
+                    res.append(curr+[nums[i]])
+                else:
+                    curr.append(nums[i])
+                    temp = nums.pop(i)
+                    permute1(nums,curr,res)
+                    nums.insert(i,temp)
+                    curr.pop()
+        permute1(sorted(nums),[],res)
+        return res
+  """
+  BackTracking
+  """
