@@ -1,0 +1,26 @@
+class TwoSum(object):
+    def __init__(self):
+        self.numberCounts={}
+    def add(self, number):
+        if number in self.numberCounts:
+            self.numberCounts[number]=self.numberCounts[number]+1
+        else:
+            self.numberCounts[number]=1
+    def find(self, value):
+        for number in self.numberCounts:
+            remain = value-number
+            if remain in self.numberCounts:
+                if number == remain:
+                    if self.numberCounts[number] > 1:
+                        return True
+                else:
+                    return True
+        return False
+# Your TwoSum object will be instantiated and called as such:
+# twoSum = TwoSum()
+# twoSum.add(number)
+# twoSum.find(value)
+"""
+Hash Table
+Design
+"""
