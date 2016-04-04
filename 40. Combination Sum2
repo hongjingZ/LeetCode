@@ -1,0 +1,28 @@
+class Solution(object):
+    def combinationSum2(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        results = []
+        def findsum(nums,target,result,results):
+            for i in xrange(len(nums)):
+                if nums[i] < target:
+                    temp1 = nums[i]
+                    result.append(temp1)
+                    temp2 = nums.pop(i)
+                    findsum(nums[i:],target-temp1,result,results)
+                    nums.insert(i,temp2)
+                    result.pop()
+                if nums[i] == target:
+                    if (result+[target]) not in results:
+                        results.append(result+[target])
+                if nums[i] > target:
+                    break
+        findsum(sorted(candidates),target,[],results)
+        return results
+  """
+  Array
+  Backtracking
+  """
