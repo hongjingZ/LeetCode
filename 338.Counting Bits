@@ -1,0 +1,18 @@
+class Solution(object):
+    def countBits(self, num):
+        """
+        :type num: int
+        :rtype: List[int]
+        """
+        table = [0]*(num+1)
+        for i in xrange(1,num+1):
+            if  float(math.log(i,2))- int(math.log(i,2))== 0:
+                table[i] = 1
+            else:
+                k = int(math.log(i,2))
+                table[i] = 1 + table[int(i-math.pow(2,k))]
+        return table
+  """
+  DP
+  BitManipulation
+  """
