@@ -1,0 +1,17 @@
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        length = len(nums)
+        table = [0]*(length+1)
+        for i in xrange(1,length+1):
+            if i == 1: 
+                table[i] = nums[i-1]
+            else:
+                table[i] = max(nums[i-1]+table[i-2],table[i-1])
+        return table[-1]
+  """
+  DP
+  """
