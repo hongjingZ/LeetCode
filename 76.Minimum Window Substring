@@ -1,0 +1,36 @@
+class Solution(object):
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        d = {}
+        for c in t:
+            if c not in d:  d[c] = 1
+            else:   d[c]+=1
+        ToFind, ind = len(t), []
+        L, R, head = -len(s)-1, -1, 0
+    
+        for i, c in enumerate(s):
+            if c in d:
+                ind.append(i) # ind record the order each ch occured
+                d[c] -= 1
+                if d[c] >=0:
+                    ToFind -= 1
+                if ToFind == 0: # satisfy
+                    while d[s[ind[head]]] < 0: # s[ind[head]] is the character BBAC-> BAC since d[B] = -1
+                        d[s[ind[head]]] += 1
+                        head += 1
+                    if i - ind[head] < R - L: ## current - ind[head] = R - L
+                        L, R = ind[head], i
+    
+                    d[s[ind[head]]] += 1   ## skip BAC's B and add tofind and head to next ch, say A
+                    ToFind += 1
+                    head += 1
+    
+        return s[L:R+1]
+  """
+  Hash Table
+  Two Pointers
+  """
