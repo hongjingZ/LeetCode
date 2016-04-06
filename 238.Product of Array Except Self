@@ -1,0 +1,22 @@
+class Solution(object):
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        length = len(nums)
+        temp_list,temp = [1]*length,1
+        for i in xrange(length-1,-1,-1):
+            if i == length-1:   temp = 1
+            else:
+                temp *= nums[i+1]
+                temp_list[i] *= temp
+        for j in xrange(length):
+            if j == 0:  temp = 1
+            else:
+                temp *= nums[j-1]
+                temp_list[j] *= temp
+        return temp_list
+  """
+  Array
+  """
