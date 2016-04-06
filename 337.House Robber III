@@ -1,0 +1,29 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def rob(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def dfs(node):
+            if node and not node.left and not node.right:
+                return (node.val,0)
+            lv,pre_lv,rv,pre_rv = 0,0,0,0
+            if node.left:
+                lv,pre_lv = dfs(node.left)
+            if node.right:
+                rv,pre_rv = dfs(node.right)
+            return  (max(node.val+pre_lv+pre_rv,lv+rv),lv+rv)
+        if root == None:    return 0
+        v1,v2 = dfs(root)
+        return v1
+  """
+  Tree
+  DFS
+  """
