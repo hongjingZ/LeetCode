@@ -1,0 +1,35 @@
+class Solution(object):
+    def minCostII(self, costs):
+        """
+        :type costs: List[List[int]]
+        :rtype: int
+        """
+        if len(costs) == 0: return 0
+        k = len(costs[0])
+        table = [[0]*k for _ in xrange(len(costs))]
+        min1,index = float('inf'),[]
+        for i in xrange(len(costs)):
+            if i == 0:
+                for j in xrange(k):
+                    table[0][j] = costs[0][j]
+                min1 = min(table[0])
+                for j in xrange(k):
+                    if table[0][j] == min1: index.append(j)
+            else:
+                for j in xrange(k):
+                    if j not in index or (j in index and len(index) > 1):
+                        table[i][j] = costs[i][j] + min1
+                    else:
+                        min2 = float('inf')
+                        for m in xrange(k):
+                            if m == j:  continue
+                            if table[i-1][m] < min2:    min2 = table[i-1][m]
+                        table[i][j] = costs[i][j] + min2
+                min1,index = min(table[i]),[]
+                for j in xrange(k):
+                    if table[i][j] == min1: index.append(j)
+        return min(table[-1])
+  """
+  DP
+  O(nk)
+  """
