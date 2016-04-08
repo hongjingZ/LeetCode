@@ -1,0 +1,21 @@
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        if len(prices) == 0:    
+            return 0
+        else:
+            min_v,max_v,profit = prices[0],prices[0],0
+            for i in xrange(1,len(prices)):
+                if prices[i] > max_v:
+                    max_v = prices[i]
+                    profit = max(profit,max_v-min_v)
+                elif prices[i] < min_v:
+                    min_v,max_v = prices[i],prices[i]
+            return profit
+  """
+  Array
+  DP
+  """
