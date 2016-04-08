@@ -1,0 +1,32 @@
+class Solution(object):
+    def maxProfit(self, k, prices):
+        """
+        :type k: int
+        :type prices: List[int]
+        :rtype: int
+        """
+        if k==0 or len(prices) < 2: return 0
+        if k > len(prices)/2: return self.cheating(prices)
+        buy = [-prices[0]]*(k+1)
+        sel = [0]*(k+1)
+        for i in range(1,len(prices)):
+            for j in range(k,0,-1):
+                sel[j] = max(sel[j], prices[i] + buy[j])
+                buy[j] = max(buy[j], sel[j-1] - prices[i])
+        """
+        local[i][j] = max(global[i – 1][j – 1] , local[i – 1][j] + diff)
+        global[i][j] = max(global[i – 1][j], local[i][j])
+        local means sell at day i(diff may be negative or positive); global means max profit when sell at most j times at day i.
+        int diff = prices[i] - prices[i - 1];
+        Two dimension array can be reduced to one dimension
+        """
+        return sel[-1]
+
+    def cheating(self,prices):
+        res = 0
+        for i in range(1,len(prices)):
+            res += max(0,prices[i]-prices[i-1])
+        return res
+  """
+  DP
+  """
