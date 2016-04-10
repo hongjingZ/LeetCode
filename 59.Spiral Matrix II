@@ -1,0 +1,25 @@
+class Solution(object):
+    def generateMatrix(self, n):
+        """
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        if n == 0:
+            return []
+        else:
+            results,num_v = [[0]*n for _ in xrange(n)],n*n-1
+            directions,start = [(0,1),(-1,0),(0,-1),(1,0)],0
+            s_x,s_y,val = 0,0,2
+            results[s_x][s_y] = 1
+            while num_v > 0:
+                d_x,d_y = directions[start%4]
+                while(s_x+d_x >= 0 and s_x+d_x <n and s_y+d_y >=0 and s_y+d_y < n and results[s_x+d_x][s_y+d_y] == 0):
+                    s_x,s_y = s_x+d_x,s_y+d_y
+                    results[s_x][s_y] = val
+                    num_v -= 1
+                    val += 1
+                start += 1
+            return results
+  """
+  Array
+  """
