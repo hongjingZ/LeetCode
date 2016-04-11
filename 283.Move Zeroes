@@ -1,0 +1,20 @@
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        zero_line = []
+        for i in xrange(len(nums)):
+            if nums[i] == 0:
+                zero_line.append(i)
+            else:
+                if len(zero_line) > 0:  
+                    index = zero_line.pop(0)
+                    nums[index] = nums[i]
+                    nums[i] = 0
+                    zero_line.append(i)
+  """
+  Array
+  Two pointers
+  """
