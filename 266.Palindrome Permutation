@@ -1,0 +1,21 @@
+class Solution(object):
+    def canPermutePalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        dic,count = {},0
+        for i in xrange(len(s)):
+            if s[i] not in dic:
+                dic[s[i]] = 1
+            else:
+                dic[s[i]] += 1
+        for key in dic.keys():
+            if dic[key] % 2 == 1:
+                count += 1
+            if count >= 2:
+                return False
+        return True
+  """
+  Hash Table
+  """
