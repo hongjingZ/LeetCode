@@ -5,11 +5,11 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        table = [[1]*n for _ in xrange(m)]
+        table = [1]*n
         for i in xrange(1,m):
             for j in xrange(1,n):
-                table[i][j] = table[i-1][j] + table[i][j-1]
-        return table[-1][-1]
+                table[j] = table[j] + table[j-1]
+        return table[-1]
   """
   DP
   """
