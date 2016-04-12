@@ -1,0 +1,33 @@
+class Solution(object):
+    def multiply(self, A, B):
+        """
+        :type A: List[List[int]]
+        :type B: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        pre,mid,post = len(A),len(B),len(B[0])
+        result,dicA,dicB = [[0]*post for _ in xrange(pre)],{},{}
+        for i in xrange(pre):
+            count = 0
+            for j in xrange(mid):
+                if A[i][j] == 0:    count += 1
+                else:   break
+            if count == mid:  dicA[i] = 1
+        
+        for j in xrange(post):
+            count = 0
+            for i in xrange(mid):
+                if B[i][j] == 0:    count += 1
+                else:   break
+            if count == post:  dicB[j] = 1
+        
+        for row in xrange(pre):
+            if row in dicA:  continue
+            for col in xrange(mid):
+                for k in xrange(post):
+                    if k in dicB:    continue
+                    result[row][k] += A[row][col]*B[col][k]
+        return result
+  """
+  Hash Table
+  """
