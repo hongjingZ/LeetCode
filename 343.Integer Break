@@ -1,0 +1,17 @@
+class Solution(object):
+    def integerBreak(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        table = [1]*n
+        for i in xrange(2,n):
+            temp = 0
+            for j in xrange(1,(i+1)/2+1):
+                temp = max(table[j-1]*(i-j+1),j*(i-j+1),table[j-1] * table[i-j],j*table[i-j],temp)
+            table[i] = temp
+        return table[-1]
+  """
+  DP
+  Math
+  """
