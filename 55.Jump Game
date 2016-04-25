@@ -1,0 +1,21 @@
+class Solution(object):
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        zero_count,index,flag=0,0,0
+        for i in xrange(len(nums)-2,-1,-1):
+            if nums[i] == 0 and flag == 0:  
+                zero_count += 1
+                index = i
+            if nums[i] == 0 and flag == 1:  return False
+            if nums[i] > 0 and zero_count > 0:
+                if nums[i] > zero_count+index-i-1:    
+                    zero_count,flag = 0,0
+                else:   flag = 1
+        if zero_count >0 and len(nums)>1:   return False
+        return True
+  """
+  Array Greedy
+  """
