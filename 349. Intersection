@@ -1,0 +1,15 @@
+class Solution(object):
+    def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        dic,ans = {},[]
+        for element in nums1:
+            if element not in dic:
+                dic[element] = 1
+        for element in nums2:
+            if element in dic and element not in ans:
+                ans.append(element)
+        return ans
