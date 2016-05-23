@@ -1,0 +1,21 @@
+class Solution(object):
+    def intersect(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        dic1,dic2,ans = {},{},[]
+        for i in nums1:
+            if i not in dic1:
+                dic1[i] = 1
+            elif i in dic1:
+                dic1[i] += 1
+        for j in nums2:
+            if j in dic1 and j not in dic2:
+                dic2[j] = 1
+            elif j in dic2:
+                dic2[j] += 1
+        for element in dic2:
+           ans.extend([element]*min(dic2[element],dic1[element]))
+        return ans
