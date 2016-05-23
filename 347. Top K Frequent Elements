@@ -1,0 +1,22 @@
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        dic,self._queue = {},[]
+        for i in nums:
+            if i not in dic:
+                dic[i] = 1
+            else:   dic[i]+=1
+        for element in dic.keys():
+            if dic[element] > self._queue.top()
+                self._queue.pop
+                self._queue.push(element)
+  
+    def put(self, item, priority):  
+        heappush(self._queue, (-priority, item))  
+  
+    def get(self):  
+        return heappop(self._queue)[-1] 
