@@ -1,0 +1,34 @@
+class MovingAverage(object):
+
+    def __init__(self, size):
+        """
+        Initialize your data structure here.
+        :type size: int
+        """
+        self.queue = []
+        self.size = size
+        self.res = 0
+        self.cur_size = 0
+
+    def next(self, val):
+        """
+        :type val: int
+        :rtype: float
+        """
+        if self.cur_size < self.size:
+            self.res += val
+            self.cur_size += 1
+            self.queue.append(val)
+            return float(self.res)/float(self.cur_size)
+        else:
+            num_pop = self.queue.pop(0)
+            self.queue.append(val)
+            self.res = self.res - num_pop + val
+            return float(self.res)/float(self.cur_size)
+            
+        
+
+
+# Your MovingAverage object will be instantiated and called as such:
+# obj = MovingAverage(size)
+# param_1 = obj.next(val)
