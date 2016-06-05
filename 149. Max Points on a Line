@@ -1,0 +1,34 @@
+# Definition for a point.
+# class Point(object):
+#     def __init__(self, a=0, b=0):
+#         self.x = a
+#         self.y = b
+
+class Solution(object):
+    def maxPoints(self, points):
+        """
+        :type points: List[Point]
+        :rtype: int
+        """
+        
+        length,max_list = len(points),[]
+        if length == 0: return 0
+        for i in xrange(length):
+            max_dic,origin,maximal,digit = collections.defaultdict(list),(points[i].x,points[i].y),0,0
+            for j in xrange(i+1,length):
+                slope = 0
+                if points[j].x-origin[0] == 0 and points[j].y-origin[1] != 0:
+                    slope = float('inf')
+                elif points[j].x-origin[0] == 0 and points[j].y-origin[1] == 0:
+                    digit += 1
+                    continue
+                else:
+                    slope = float(points[j].y- origin[1])/float(points[j].x-origin[0])
+                max_dic[slope].append((points[i].x,points[i].y))
+            for key in max_dic:
+                if len(max_dic[key]) > maximal:
+                    maximal = len(max_dic[key])
+            if maximal != 0:
+                max_list.append(maximal+digit)
+        if len(max_list) == 0 and length >0:  return length
+        else:   return max(max_list)+1
