@@ -1,0 +1,17 @@
+class Solution(object):
+    def isPerfectSquare(self, num):
+        """
+        :type num: int
+        :rtype: bool
+        """
+        start,end = 1,num
+        while(start <= end):
+            cur = (start+end)/2
+            if cur*cur == num:
+                return True
+            elif cur*cur > num:
+                end = cur-1
+            else:
+                start = cur + 1
+        return False
+                
