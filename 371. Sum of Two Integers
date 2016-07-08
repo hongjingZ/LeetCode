@@ -1,0 +1,20 @@
+class Solution(object):
+    def getSum(self, a, b):
+        """
+        :type a: int
+        :type b: int
+        :rtype: int
+        """
+        MAX_INT = 0x7FFFFFFF
+        MIN_INT = 0x80000000
+        MASK = 0x100000000
+        while b:
+            a, b = (a ^ b) % MASK, ((a & b) << 1) % MASK
+        return a if a <= MAX_INT else ~((a % MIN_INT) ^ MAX_INT)
+        
+        
+"""
+bit manipution 
+Use ^ to remove even exactly same numbers and save the odd, or save the distinct bits and remove the same.
+Use ^ and & to add two integers
+"""
