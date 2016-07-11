@@ -1,0 +1,30 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def plusOne(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        num,digit = 0,0
+        p,q,my_array = head,head,[]
+        while(p != None):
+            num = num * 10 + p.val
+            p = p.next
+            digit += 1
+        num += 1
+        while(num != 0):
+            my_array.append(num%10)
+            num = num/10
+        res,i,length = head,1,len(my_array)
+        while(i <= digit):
+            res.val = my_array[length-i]
+            i+= 1
+            if i <= digit:   res = res.next
+        if length > digit:  res.next = ListNode(my_array[0])
+        return q
+            
