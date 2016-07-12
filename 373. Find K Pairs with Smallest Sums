@@ -1,0 +1,24 @@
+class Solution(object):
+    def kSmallestPairs(self, nums1, nums2, k):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        """
+        h = []
+        if len(nums1) == 0 or len(nums2) == 0: 
+            return []
+        else:
+            for i in xrange(len(nums1)):
+                if i > k: break
+                for j in xrange(len(nums2)):
+                    heapq.heappush(h,(nums1[i]+nums2[j],i,j))
+        res = []
+        for i in xrange(0,min(k,len(h))):
+            _,index1,index2 = heapq.heappop(h)
+            res.append([nums1[index1],nums2[index2]])
+        return res
+        """
+        return map(list, heapq.nsmallest(k, itertools.product(nums1, nums2), key=sum))
