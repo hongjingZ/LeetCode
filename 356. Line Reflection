@@ -1,0 +1,35 @@
+class Solution(object):
+    def isReflected(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: bool
+        """
+        """
+        if len(points) == 0:    return True
+        my_dic = collections.defaultdict(list)
+        for point in points:
+            if point[0] not in my_dic[point[1]]:    my_dic[point[1]].append(point[0])
+        average = []
+        for key in my_dic:
+            average.append(float(sum(my_dic[key])) / float(len(my_dic[key])))
+        if max(average) != min(average):    return False
+        else:
+            for key in my_dic:
+                total = len(my_dic[key])
+                if total % 2 == 1:
+                    num = 0
+                    for pos in my_dic[key]:
+                        if pos < average[0]: num += 1
+                        if pos > average[0]: num -= 1    
+                    if num != 0:    return False
+                else:
+                    l_num,r_num = 0,0
+                    for pos in my_dic[key]:
+                        if pos < average[0]: l_num += 1
+                        elif pos > average[0]: r_num += 1
+                    if l_num != r_num:    return False
+            return True
+        """
+        if not points: return True
+        X = min(points)[0] + max(points)[0]
+        return {(x, y) for x, y in points} == {(X - x, y) for x, y in points}
