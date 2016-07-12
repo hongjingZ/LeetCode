@@ -1,0 +1,36 @@
+class Solution {
+public:
+int superPow(int a, vector<int>& b) {
+    const int mod = 1337; // 1337 = 7 * 191;
+    if (b.size() == 1 && b[0] == 0) return 1;
+    if (a % mod == 0) return 0;
+    const int phi_of_1337 = 1140; // phi(1337) = phi(7) * phi(191) = 6 * 190 = 1140;
+    int p = 0;
+    for (int i = 0; i < b.size(); ++i) p = (p * 10 + b[i]) % phi_of_1337;
+    if (a % 7 == 0) {
+        const int mod2 = 191;
+        int p2 = 0;
+        for (int i = 0; i < b.size(); ++i) p2 = (p2 * 10 + b[i]) % (mod2 - 1);
+        if (p2 == 0) p2 += mod2 - 1;
+        return 7 * power(7, p2 - 1, mod2) % mod * power(a / 7, p, mod) % mod;
+    }
+    if (a % 191 == 0) {
+        const int mod2 = 7;
+        int p2 = 0;
+        for (int i = 0; i < b.size(); ++i) p2 = (p2 * 10 + b[i]) % (mod2 - 1);
+        if (p2 == 0) p2 += mod2 - 1;
+        return 191 * power(191, p2 - 1, mod2) % mod * power(a / 191, p, mod) % mod;
+    }
+    return power(a, p, mod);
+}
+int power(int x, int n, int mod) {
+    x %= mod;
+    int ret = 1;
+    while (n) {
+        if (n & 1) ret = ret * x % mod;
+        x = x * x % mod;
+        n >>= 1;
+    }
+    return ret;
+}
+};
