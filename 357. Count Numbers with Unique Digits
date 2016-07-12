@@ -1,0 +1,16 @@
+class Solution(object):
+    def countNumbersWithUniqueDigits(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 0:   return 1
+        dp,res = [10],0
+        for i in xrange(1,n):
+            val = 9*9
+            for j in xrange(2,i+1):
+                val = val * (9+2-(j+1))
+            dp.append(val)
+        for i in xrange(n):
+            res += dp[i]
+        return res
