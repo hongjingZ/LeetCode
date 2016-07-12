@@ -1,0 +1,30 @@
+class Solution(object):
+    def canMeasureWater(self, x, y, z):
+        """
+        :type x: int
+        :type y: int
+        :type z: int
+        :rtype: bool
+        """
+        """
+        res = [0]
+        if x > y:
+            big,small = x,y
+        else:
+            big,small = y,x
+        res.append(big)
+        cur_num = small
+        diff = small-big
+        while(cur_num not in res):
+            res.append(cur_num)
+            res.append(cur_num+big)
+            cur_num += diff
+            if cur_num < 0: cur_num += big
+        return True if z in res else False
+        """
+        def gcd(x, y):
+                while x:
+                    x, y = y % x, x
+                return y
+    
+        return z == x+ y or (z < x + y and z % gcd(x, y) == 0)
