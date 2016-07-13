@@ -1,0 +1,41 @@
+class Solution(object):
+    def sortTransformedArray(self, nums, a, b, c):
+        """
+        :type nums: List[int]
+        :type a: int
+        :type b: int
+        :type c: int
+        :rtype: List[int]
+        """
+        res = []
+        if a == 0:
+            if b < 0:
+                nums.reverse()
+            for num in nums:
+                res.append(b*num+c)
+        else:
+            pivot = float(b)/float(-2*a)
+            temp,mid = float('inf'),0
+            for i in xrange(len(nums)):
+                if abs(nums[i]-pivot) < temp:
+                    temp,mid = abs(nums[i]-pivot),i
+            res.append(a*nums[mid]*nums[mid]+b*nums[mid]+c)
+            left,right = mid - 1,mid + 1
+            for i in xrange(len(nums)-1):
+                if left >= 0 and right <= len(nums)-1:
+                    if abs(nums[left]-pivot) < abs(nums[right]-pivot):
+                        cur = left
+                        left = left - 1
+                    else:
+                        cur = right
+                        right = right + 1
+                elif left < 0:
+                    cur = right
+                    right = right + 1
+                else:
+                    cur = left
+                    left = left - 1
+                res.append(a*nums[cur]*nums[cur]+b*nums[cur]+c)
+            if a < 0:   res.reverse()
+        return res
+            
