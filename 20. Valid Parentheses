@@ -1,0 +1,18 @@
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        my_stack,my_dic = [],{']':'[',')':'(','}':'{'}
+        in_team = ['[','(','{']
+        for element in s:
+            if element in in_team:
+                my_stack.append(element)
+            else:
+                if len(my_stack) == 0:  return False
+                else:
+                    if my_dic[element] != my_stack.pop(-1): return False
+        return len(my_stack) == 0 
+                    
+                
