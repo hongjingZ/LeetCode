@@ -1,0 +1,22 @@
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if len(s) != len(t):    return False
+        else:
+            d1,d2 ={},{} 
+            for element in s:   
+                if element in d1:   d1[element] += 1
+                else:   d1[element] = 1
+            for element in t:
+                if element in d2:   d2[element] += 1
+                else:   d2[element] = 1   
+            for key in d1:
+                if key not in d2 or d2[key] != d1[key]: return False
+            for key in d2:
+                if key not in d1 or d2[key] != d1[key]: return False
+            return True
+  
