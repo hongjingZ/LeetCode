@@ -1,0 +1,35 @@
+class Solution(object):
+    """
+    def searchMatrix(self, matrix, target):
+        if matrix:
+            row,col,width=len(matrix)-1,0,len(matrix[0])
+            while row >= 0 and col < width:
+                if matrix[row][col]==target:    return True
+                elif matrix[row][col]>target:   row -= 1
+                else:   col += 1
+            return False
+    O(m+n)
+    """
+    def searchMatrix(self, matrix, target):
+        if len(matrix) == 0 or len(matrix[0]) == 0:
+            return False
+        def binarySearch(matrix, rowStart, rowEnd, colStart, colEnd, target):
+            if rowStart > rowEnd or colStart > colEnd:  return False
+            if rowStart == rowEnd and colStart == colEnd:   return matrix[rowStart][colStart] == target
+            rowM,colM = (rowStart + rowEnd) / 2,(colStart + colEnd) / 2
+            if matrix[rowM][colM] < target:
+                #search all blocks except upper left block
+                return binarySearch(matrix, rowM+1, rowEnd, colStart, colEnd, target) \
+                    or binarySearch(matrix, rowStart, rowM, colM+1, colEnd, target)
+            elif matrix[rowM][colM] > target:
+                #search all blocks except right bottom block: upper right, upper left
+                return binarySearch(matrix, rowStart, rowM-1, colM+1, colEnd, target) \
+                    or binarySearch(matrix, rowStart, rowM, colStart, colM, target) \
+                    or binarySearch(matrix, rowM+1, rowEnd, colStart, colM-1, target)
+            else:   return True
+        rowH,colH = len(matrix) - 1,len(matrix[0]) - 1 
+        return binarySearch(matrix, 0, rowH, 0, colH, target)
+
+    """
+    divide and conquer
+    """
