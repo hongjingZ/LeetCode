@@ -1,0 +1,11 @@
+class Solution(object):
+    def reverseWords(self, s):
+        """
+        :type s: a list of 1 length strings (List[str])
+        :rtype: nothing
+        """
+        if len(s) != 0:
+            ##join list s
+            ##split new string and reverse,saved in list
+            ## join reversed list and return list
+            s[:] = list(' '.join(reversed(''.join(s).split(' '))))
