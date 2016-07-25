@@ -1,0 +1,12 @@
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) == 0:  return None
+        dp_num = [0]*len(nums)
+        dp_num[0] = nums[0]
+        for i in xrange(1,len(nums)):
+            dp_num[i] = max(nums[i],dp_num[i-1]+nums[i])
+        return max(dp_num)
