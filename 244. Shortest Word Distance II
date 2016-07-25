@@ -1,0 +1,26 @@
+class WordDistance(object):
+    def __init__(self, words):
+        """
+        initialize your data structure here.
+        :type words: List[str]
+        """
+        self.dic = collections.defaultdict(list)
+        for i in xrange(len(words)):
+            self.dic[words[i]].append(i)
+        
+
+    def shortest(self, word1, word2):
+        """
+        Adds a word into the data structure.
+        :type word1: str
+        :type word2: str
+        :rtype: int
+        """
+        list1,list2,res = self.dic[word1],self.dic[word2],float('inf')
+        for element1 in list1:
+            for element2 in list2:
+                if abs(element1-element2) < res:
+                    res = abs(element1-element2)
+                    if res == 1:    return res
+        return res
+        
