@@ -1,0 +1,27 @@
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        if len(nums) == 1 and target == nums[0]: return [0,0]
+        res = []
+        start,end = 0,len(nums)-1
+        while(start <= end):
+            mid = (start + end)/2
+            if nums[mid] == target:
+                left,right = mid,mid
+                for i in xrange(mid,-1,-1):
+                    if nums[i] == target:   left = i
+                    else:   break
+                for j in xrange(mid+1,len(nums)):
+                    if nums[j] == target:   right = j
+                    else:   break
+                res = [left,right]
+                break
+            elif nums[mid] < target:
+                start = mid + 1
+            else:
+                end = mid - 1
+        return res or [-1,-1]
