@@ -1,0 +1,20 @@
+class Solution(object):
+    def myPow(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        def dfs(x,n):
+            if n == 1:  return x
+            else:
+                if n % 2 == 0:  return dfs(x*x,n/2)
+                else:   return dfs(x,n-1)*x
+        flag = 0
+        if n < 0:
+            n,flag = -n,1
+        elif n == 0:    return 1.0
+        ans = dfs(x,n)
+        if flag == 1:   ans = float(1)/float(ans)
+        return ans
+ 
