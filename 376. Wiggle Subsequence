@@ -1,0 +1,51 @@
+class Solution(object):
+    def wiggleMaxLength(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        16,-12,5,3,2,-5,-5,11,-8
+        
+        if len(nums)<2:    return len(nums)
+        else:
+            dp = [0]*len(nums)
+            for i in range(1,len(nums)):
+                dp[i] = nums[i]-nums[i-1]
+            count,flag,last_digit,j = 1,0,0,1
+            while(j<len(nums)-1):
+                temp = j+1
+                while(temp < len(nums)-1 and dp[temp] == 0): ## same number we can skip
+                    temp += 1
+                    flag += 1
+                if dp[j]*dp[temp] < 0:  
+                    count += 1
+                    last_digit = 1 if dp[j] > 0 else -1
+                else:
+                    flag += 1
+                j=temp
+            if last_digit * dp[-1] < 0: count += 1     ##last digit is different,count += 1
+            if flag == len(nums)-2 and sum(dp) != 0: count = 2 ##only increasing or only decreasing
+            return count
+        """
+        if (len(nums) < 2):
+            return len(nums)
+        # create array of diffs
+        diffs = []
+        for i in range(1, len(nums)):
+            x = nums[i] - nums[i - 1]
+            # ignore diffs of 0 as they don't count as turning points
+            if (x != 0):
+                diffs.append(x)
+        # if there were diffs of only 0, then seq length is 1
+        if (not diffs):
+            return 1
+            
+        cnt = 1 # min seq length at this stage
+        # now count the number of times the sign of diff between consecutive numbers changes
+        # that will be equal to the max wiggle subseq length
+        for i in range(1, len(diffs)):
+            prod = diffs[i] * diffs[i - 1]
+            if (prod < 0):
+                cnt += 1
+                
+        return cnt + 1
+            
