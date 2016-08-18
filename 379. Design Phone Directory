@@ -1,0 +1,55 @@
+class PhoneDirectory(object):
+
+    def __init__(self, maxNumbers):
+        """
+        Initialize your data structure here
+        @param maxNumbers - The maximum numbers that can be stored in the phone directory.
+        :type maxNumbers: int
+        """
+        self.teldic = {}
+        for i in xrange(maxNumbers):
+            self.teldic[i] = 0
+        
+
+    def get(self):
+        """
+        Provide a number which is not assigned to anyone.
+        @return - Return an available number. Return -1 if none is available.
+        :rtype: int
+        """
+        for key in self.teldic.keys():
+            if self.teldic[key] == 0:
+                self.teldic[key] = 1
+                return key
+        return -1
+        
+
+    def check(self, number):
+        """
+        Check if a number is available or not.
+        :type number: int
+        :rtype: bool
+        """
+        if number not in self.teldic or self.teldic[number] == 1:
+            return False
+        else:
+            return True
+
+    def release(self, number):
+        """
+        Recycle or release a number.
+        :type number: int
+        :rtype: void
+        """
+        self.teldic[number] = 0
+        
+
+
+# Your PhoneDirectory object will be instantiated and called as such:
+# obj = PhoneDirectory(maxNumbers)
+# param_1 = obj.get()
+# param_2 = obj.check(number)
+# obj.release(number)
+
+
+could also be realized by linked list
