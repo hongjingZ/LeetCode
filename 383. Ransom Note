@@ -1,0 +1,19 @@
+class Solution(object):
+    def canConstruct(self, ransomNote, magazine):
+        """
+        :type ransomNote: str
+        :type magazine: str
+        :rtype: bool
+        """
+        ma_dic,ranso = {},{}
+        for i in magazine:
+            if i not in ma_dic:
+                ma_dic[i] = 1
+            else:
+                ma_dic[i] += 1
+        for j in ransomNote:
+            if j not in ma_dic or ma_dic[j] < 1:
+                return False
+            else:
+                ma_dic[j] -= 1
+        return True
