@@ -1,0 +1,10 @@
+class Solution(object):
+    def combinationSum4(self, nums, target):
+        dp = [0] * (target + max(nums or [1]))
+        dp[0] = 1
+        for i in range(target):
+            if dp[i] is not 0:
+                for n in nums:
+                    dp[i+n] += dp[i]
+        return dp[target]
+        
