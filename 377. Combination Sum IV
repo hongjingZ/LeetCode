@@ -7,4 +7,28 @@ class Solution(object):
                 for n in nums:
                     dp[i+n] += dp[i]
         return dp[target]
-        
+    """ bottom up"""
+    
+    
+    
+    
+    def combinationSum4(self, nums, target):
+        dp,visited = [0]*(target+1),[False]*(target+1)
+        nums.sort()
+        dp[0],visited[0] = 1,True
+        def dp_top_down(nums,tar,dp,visited):
+            temp = 0
+            for n in nums:
+                if tar-n >= 0:
+                    if dp[tar-n]!=0 or visited[tar-n] == True:
+                        temp += dp[tar-n]
+                    else:
+                        temp += dp_top_down(nums,tar-n,dp,visited)
+                else:
+                    break
+            dp[tar],visited[tar] = temp,True
+            return dp[tar]
+        dp_top_down(nums,target,dp,visited)
+        return dp[target]
+    
+    """ top down"""
