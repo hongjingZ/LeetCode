@@ -1,0 +1,34 @@
+class Solution(object):
+    def lexicalOrder(self, n):
+        withKeys = []
+        for i in xrange(1, n+1):
+            key = i
+            while key < 1000000:
+                key *= 10
+            withKeys.append(key * 10000000 + i)
+        withKeys.sort()
+        return [ki % 10000000 for ki in withKeys]
+"""    
+class Solution(object):
+    def _generator(self, n, start, decimal_places, len_digits):
+        decimal_places += 1
+        end = start+10 if (start+10) <= n else n + 1
+        
+        if decimal_places == len_digits:
+            return range(start, end) if start != 0 else range(start+1, end)
+        
+        output_list = []
+        for i in xrange(start, end):
+            output_list.append(i)
+            if (i*10 <= n) and i>0:
+                output_list += self._generator(n, i*10, decimal_places, len_digits)
+        
+        return output_list if start != 0 else output_list[1:]
+                
+    def lexicalOrder(self, n):
+        """
+        :type n: int
+        :rtype: List[int]
+        """
+        return self._generator(n, 0, 0, len(str(n)))
+"""
