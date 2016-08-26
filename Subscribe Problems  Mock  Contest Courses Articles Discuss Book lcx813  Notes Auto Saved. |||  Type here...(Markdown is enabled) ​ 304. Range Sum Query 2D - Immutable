@@ -1,0 +1,16 @@
+class NumMatrix(object):
+    def __init__(self, matrix):
+        for row in matrix:
+            for i in xrange(1, len(row)):
+                row[i] += row[i-1]
+        self.matrix = matrix
+
+    def sumRegion(self, row1, col1, row2, col2):
+        sumVal = 0
+        for i in xrange(row1, row2+1):
+            sumVal += self.matrix[i][col2] - (self.matrix[i][col1-1] if col1 > 0 else 0)
+        return sumVal
+# Your NumMatrix object will be instantiated and called as such:
+# numMatrix = NumMatrix(matrix)
+# numMatrix.sumRegion(0, 1, 2, 3)
+# numMatrix.sumRegion(1, 2, 3, 4)
