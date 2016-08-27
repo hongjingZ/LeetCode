@@ -1,0 +1,29 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def longestConsecutive(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def dfs(root,prev_val,temp,max_val):
+            if root.val == prev_val + 1:
+                temp += 1
+                max_val = max(temp,max_val)
+            else:
+                temp = 1
+            val1,val2 = 1,1
+            if root.left:
+                val1 = dfs(root.left,root.val,temp,max_val)
+            if root.right:
+                val2 = dfs(root.right,root.val,temp,max_val)
+            return max(val1,val2,max_val)
+        if root == None:    return 0
+        else:
+            return dfs(root,root.val-1,0,1)
+                    
